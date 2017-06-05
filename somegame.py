@@ -1,6 +1,8 @@
 import pygame
+# Global Constants
 screen_width = 640
 screen_height = 480
+# Initialization
 pygame.init()
 pygame.display.set_caption("Ping!")
 screen = pygame.display.set_mode((screen_width, screen_height))
@@ -12,9 +14,21 @@ player2 = pygame.image.load("player2.png")
 ball = pygame.image.load("ball.png")
 clock = pygame.time.Clock()
 running=True
+
+# Assume each player is 16x48
+def move_player(person,dy):
+        person.y = person.y + dy
+        # This is where we check for walls
+        if person.y > screen_height-48:
+                # Move Down
+                person.y=screen_height-48
+        if person.y < 0:
+                # Move Up
+                person.y=0
+
 while running:
         clock.tick(300)
-        screen.fill((66, 164, 244))
+        screen.fill((200, 200, 200))
         screen.blit(player1,player1pos)
         screen.blit(player2,player2pos)
         screen.blit(ball,ballpos)
@@ -28,3 +42,15 @@ while running:
         if key[pygame.K_ESCAPE]:
                 pygame.quit()
                 running=False
+        if key[pygame.K_a]:
+                # Player 1 Up
+                move_player(player1pos,-1)
+        if key[pygame.K_z]:
+                # Player 1 Down
+                move_player(player1pos,1)
+        if key[pygame.K_k]:
+                # Player 2 Up
+                move_player(player2pos,-1)
+        if key[pygame.K_m]:
+                # Player 2 Down
+                move_player(player2pos,1)
