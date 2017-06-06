@@ -1,7 +1,6 @@
 import pygame
 import random
 from datetime import datetime
-import time
 # Global Constants
 screen_width = 640
 screen_height = 480
@@ -55,7 +54,7 @@ def move_ball():
                 balldx = -balldx
                 screen.blit(myfont.render(str("Get Ready"),True,(255,255,255)),(screen_width/2-100,screen_height/2-20))
                 pygame.display.flip()
-                time.sleep(1)
+                pygame.time.delay(1000)
         if ballpos.x > screen_width-16:
                 # score a point for player 1
                 player1_score=player1_score+1
@@ -65,7 +64,7 @@ def move_ball():
                 balldx = -balldx
                 screen.blit(myfont.render(str("Get Ready"),True,(255,255,255)),(screen_width/2-100,screen_height/2-20))
                 pygame.display.flip()
-                time.sleep(1)
+                pygame.time.delay(1000)
         if ballpos.y < 0:
                 # bounce by reversing dy
                 balldy = -balldy
@@ -90,7 +89,7 @@ screen.blit(myfont.render(str(player1_score),True,(255,255,255)),(70,0))
 screen.blit(myfont.render(str(player2_score),True,(255,255,255)),(screen_width-50-70,0))
 screen.blit(myfont.render(str("Get Ready"),True,(255,255,255)),(screen_width/2-100,screen_height/2-20))
 pygame.display.flip()
-time.sleep(1)
+pygame.time.delay(1000)
 while running:
         clock.tick(300)
         screen.fill((200, 200, 200))
