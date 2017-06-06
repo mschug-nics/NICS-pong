@@ -2,6 +2,10 @@ import pygame
 # Global Constants
 screen_width = 640
 screen_height = 480
+balldx = -1
+balldy = -1
+player1_score = 0
+player2_score = 0
 # Initialization
 pygame.init()
 pygame.display.set_caption("Ping!")
@@ -25,6 +29,41 @@ def move_player(person,dy):
         if person.y < 0:
                 # Move Up
                 person.y=0
+                
+# Assume ball is 16x16
+def move_ball():
+        global balldx
+        global balldy
+        global player1_score
+        global player2_score
+        ballpos.x = ballpos.x + balldx
+        ballpos.y = ballpos.y + balldy
+        # Check for collision with bounds
+
+        if ballpos.x < 0:
+                # score a point for player 2
+                player2_score=player2_score+1
+                # reset ball position
+                ballpos.x = screen_width/2-8
+                ballpos.y = screen_height/2-8
+        if ballpos.x > screen_width-16:
+                # score a point for player 1
+                player1_score=player1_score+1
+                # reset the ball position
+                ballpos.x = screen_width/2-8
+                ballpos.y = screen_height/2-8
+        if ballpos.y < 0:
+                # bounce by reversing dy
+                balldy = -balldy
+                #print("Reversing balldy. Now "+str(balldy))
+                #ballpos.y = ballpos.y + balldy
+        if ballpos.y > screen_height-16:
+                # bounce by reversing dy
+                balldy = -balldy
+                #print("Reversing balldy. Now "+str(balldy))
+                #ballpos.y = ballpos.y + balldy
+        # Check for collision with players
+        
 
 while running:
         clock.tick(300)
@@ -54,3 +93,4 @@ while running:
         if key[pygame.K_m]:
                 # Player 2 Down
                 move_player(player2pos,1)
+        move_ball()
