@@ -1,4 +1,6 @@
 import pygame
+import random
+from datetime import datetime
 # Global Constants
 screen_width = 640
 screen_height = 480
@@ -8,6 +10,9 @@ player1_score = 0
 player2_score = 0
 # Initialization
 pygame.init()
+random.seed(datetime.now())
+pygame.font.init()
+myfont = pygame.font.Font("wts11.ttf",64)
 pygame.display.set_caption("Ping!")
 screen = pygame.display.set_mode((screen_width, screen_height))
 player1pos = pygame.Rect(0,screen_height/2-24,16,48)
@@ -74,6 +79,8 @@ while running:
         screen.blit(player1,player1pos)
         screen.blit(player2,player2pos)
         screen.blit(ball,ballpos)
+        screen.blit(myfont.render(str(player1_score),True,(255,255,255)),(70,0))
+        screen.blit(myfont.render(str(player2_score),True,(255,255,255)),(screen_width-50-70,0))
         pygame.display.flip()
         events = pygame.event.get()
         for event in events:
