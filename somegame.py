@@ -63,7 +63,10 @@ def move_ball():
                 #print("Reversing balldy. Now "+str(balldy))
                 #ballpos.y = ballpos.y + balldy
         # Check for collision with players
-        
+        if ballpos.colliderect(player1pos):
+                balldx = -balldx
+        if ballpos.colliderect(player2pos):
+                balldx = -balldx
 
 while running:
         clock.tick(300)
